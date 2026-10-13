@@ -1,0 +1,29 @@
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-left: auto;
+  font-size: var(--font-size-sm);
+}
+
+.mockTag {
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.email {
+  color: var(--color-text-muted);
+}
+
+.error {
+  color: var(--color-danger);
+}
+
+.unverified {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-semibold);
+}

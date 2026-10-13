@@ -1,0 +1,6 @@
+.unavailable {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  max-width: 40rem;
+}

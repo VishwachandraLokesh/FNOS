@@ -1,0 +1,94 @@
+/*
+ * Login follows assets/ui-mockups/login.svg (D-30). Its palette is scoped to this page by
+ * overriding the shared tokens here, so the rest of the app keeps the white/black style (D-18).
+ */
+.page {
+  --color-primary: #0000a0;
+  --color-primary-hover: #000078;
+  --color-focus-ring: #0000a0;
+  /* The mockup's pale green field border is below 3:1 (WCAG 1.4.11); same hue, darkened. */
+  --color-border-control: #4e9a36;
+  --login-bg: #f4fff1;
+  --login-heading: #18748d;
+  --login-text: #565555;
+  --login-outline: rgb(99 187 71 / 30%);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--login-bg);
+}
+
+.header,
+.main {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  padding: 0.875rem var(--space-6);
+}
+
+.header img {
+  display: block;
+}
+
+.main {
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-4) var(--space-12);
+}
+
+/* Grapes sit beside the wordmark, so they are positioned relative to it, not to the page. */
+.wordmark {
+  position: relative;
+  max-width: 100%;
+}
+
+.wordmark > img:first-child {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.grapes {
+  position: absolute;
+  top: 13%;
+  left: 84.5%;
+  width: 55px;
+  transform: rotate(30deg);
+  transform-origin: top left;
+}
+
+.card {
+  width: 100%;
+  max-width: 32.625rem;
+  padding: var(--space-12) 1.875rem 5rem;
+  border-radius: 10px;
+  background: linear-gradient(120deg, rgb(99 187 71 / 1%), rgb(99 187 71 / 2%)), var(--color-bg);
+  box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (width < 40rem) {
+  .header {
+    padding-inline: var(--space-4);
+  }
+
+  .card {
+    padding: var(--space-8) var(--space-4) var(--space-10);
+  }
+
+  .grapes {
+    display: none;
+  }
+}

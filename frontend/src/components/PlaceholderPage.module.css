@@ -1,0 +1,16 @@
+.page {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+}
+
+.heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}

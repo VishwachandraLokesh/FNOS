@@ -1,0 +1,40 @@
+# Repository-wide rules. frontend/ and backend/ have their own .gitignore for app-specific output.
+
+# Only the application code is pushed. Everything else at the root (docs, plans, templates,
+# assets, archive, agent instructions) stays local and is never committed.
+/*
+!/.gitignore
+!/frontend/
+!/backend/
+
+# Secrets and local environment files (examples are committed)
+.env
+.env.*
+!.env.example
+
+# Dependencies, virtual environments and build output
+node_modules/
+.venv/
+venv/
+__pycache__/
+dist/
+build/
+coverage/
+
+# Office lock files created while a workbook or deck is open
+~$*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Logs and temporary files
+*.log
+*.tmp

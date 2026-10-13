@@ -1,0 +1,921 @@
+{
+  "components": {
+    "schemas": {
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FieldErrorDetail"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Details"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "request_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Request Id"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorBody",
+        "type": "object"
+      },
+      "ErrorResponse": {
+        "description": "Envelope for every non-2xx API response.",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse",
+        "type": "object"
+      },
+      "FieldErrorDetail": {
+        "properties": {
+          "field": {
+            "title": "Field",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "field",
+          "message"
+        ],
+        "title": "FieldErrorDetail",
+        "type": "object"
+      },
+      "FilterOptionsResponse": {
+        "properties": {
+          "data_source": {
+            "const": "mock",
+            "description": "Always \"mock\": fictional development data, never business information. Show it as mock.",
+            "title": "Data Source",
+            "type": "string"
+          },
+          "regions": {
+            "items": {
+              "$ref": "#/components/schemas/RegionOption"
+            },
+            "title": "Regions",
+            "type": "array"
+          },
+          "templates": {
+            "description": "Presentation templates; valid for every market.",
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "title": "Templates",
+            "type": "array"
+          }
+        },
+        "required": [
+          "data_source",
+          "regions",
+          "templates"
+        ],
+        "title": "FilterOptionsResponse",
+        "type": "object"
+      },
+      "HealthResponse": {
+        "properties": {
+          "service": {
+            "title": "Service",
+            "type": "string"
+          },
+          "status": {
+            "const": "ok",
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "service",
+          "version"
+        ],
+        "title": "HealthResponse",
+        "type": "object"
+      },
+      "KpiCard": {
+        "properties": {
+          "change": {
+            "description": "Signed change in `change_unit` (negative means a fall).",
+            "title": "Change",
+            "type": "number"
+          },
+          "change_unit": {
+            "enum": [
+              "percent",
+              "percentage_points"
+            ],
+            "title": "Change Unit",
+            "type": "string"
+          },
+          "id": {
+            "enum": [
+              "rsv",
+              "market_share",
+              "volume",
+              "weighted_distribution",
+              "hh_penetration"
+            ],
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "examples": [
+              "RSV"
+            ],
+            "title": "Label",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "usd",
+              "percent",
+              "kilotonnes"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "value": {
+            "description": "Raw number in `unit` (e.g. 6700000000 with unit \"usd\" for $6.7 B). The UI formats it.",
+            "title": "Value",
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "value",
+          "unit",
+          "change",
+          "change_unit"
+        ],
+        "title": "KpiCard",
+        "type": "object"
+      },
+      "KpiTabResponse": {
+        "properties": {
+          "cards": {
+            "description": "Display order. May be empty.",
+            "items": {
+              "$ref": "#/components/schemas/KpiCard"
+            },
+            "title": "Cards",
+            "type": "array"
+          },
+          "data_source": {
+            "const": "mock",
+            "description": "Always \"mock\": fictional development data, never business information. Show it as mock.",
+            "title": "Data Source",
+            "type": "string"
+          },
+          "tab": {
+            "enum": [
+              "cmi",
+              "finance",
+              "brand_category"
+            ],
+            "title": "Tab",
+            "type": "string"
+          }
+        },
+        "required": [
+          "data_source",
+          "tab",
+          "cards"
+        ],
+        "title": "KpiTabResponse",
+        "type": "object"
+      },
+      "MockSignInRequest": {
+        "properties": {
+          "email": {
+            "examples": [
+              "name@company.com"
+            ],
+            "maxLength": 254,
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "title": "MockSignInRequest",
+        "type": "object"
+      },
+      "Option": {
+        "properties": {
+          "id": {
+            "description": "Stable identifier to send back to the API.",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "description": "Text to display.",
+            "title": "Label",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label"
+        ],
+        "title": "Option",
+        "type": "object"
+      },
+      "RecentReport": {
+        "properties": {
+          "brand": {
+            "title": "Brand",
+            "type": "string"
+          },
+          "id": {
+            "examples": [
+              "FNOS_26_Q3"
+            ],
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "published"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "template": {
+            "$ref": "#/components/schemas/Option"
+          },
+          "updated_on": {
+            "format": "date",
+            "title": "Updated On",
+            "type": "string"
+          },
+          "view": {
+            "examples": [
+              "Total Europe Cluster"
+            ],
+            "title": "View",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "brand",
+          "template",
+          "view",
+          "updated_on"
+        ],
+        "title": "RecentReport",
+        "type": "object"
+      },
+      "RecentReportsResponse": {
+        "properties": {
+          "data_source": {
+            "const": "mock",
+            "description": "Always \"mock\": fictional development data, never business information. Show it as mock.",
+            "title": "Data Source",
+            "type": "string"
+          },
+          "reports": {
+            "description": "Most recently updated first. May be empty.",
+            "items": {
+              "$ref": "#/components/schemas/RecentReport"
+            },
+            "title": "Reports",
+            "type": "array"
+          }
+        },
+        "required": [
+          "data_source",
+          "reports"
+        ],
+        "title": "RecentReportsResponse",
+        "type": "object"
+      },
+      "RegionOption": {
+        "properties": {
+          "id": {
+            "description": "Stable identifier to send back to the API.",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "description": "Text to display.",
+            "title": "Label",
+            "type": "string"
+          },
+          "markets": {
+            "description": "The only markets valid for this region.",
+            "items": {
+              "$ref": "#/components/schemas/Option"
+            },
+            "title": "Markets",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "markets"
+        ],
+        "title": "RegionOption",
+        "type": "object"
+      },
+      "SessionResponse": {
+        "properties": {
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "mode": {
+            "const": "mock",
+            "description": "Always \"mock\": the session is a local development stand-in, not real authentication.",
+            "title": "Mode",
+            "type": "string"
+          },
+          "user": {
+            "$ref": "#/components/schemas/SessionUser"
+          }
+        },
+        "required": [
+          "mode",
+          "user",
+          "expires_at"
+        ],
+        "title": "SessionResponse",
+        "type": "object"
+      },
+      "SessionUser": {
+        "description": "Only what the user typed. No names, roles or other identity claims are invented.",
+        "properties": {
+          "email": {
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "title": "SessionUser",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "FNOS Automation Engine API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/dashboard/filter-options": {
+      "get": {
+        "operationId": "read_filter_options_api_v1_dashboard_filter_options_get",
+        "parameters": [
+          {
+            "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+            "in": "query",
+            "name": "mock_scenario",
+            "required": false,
+            "schema": {
+              "default": "normal",
+              "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+              "enum": [
+                "normal",
+                "empty",
+                "error"
+              ],
+              "title": "Mock Scenario",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+            "in": "cookie",
+            "name": "fnos_mock_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+              "title": "Fnos Mock Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilterOptionsResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Region, Market and Presentation Template options",
+        "tags": [
+          "dashboard (mock data, development only)"
+        ]
+      }
+    },
+    "/api/v1/dashboard/kpis": {
+      "get": {
+        "operationId": "read_kpis_api_v1_dashboard_kpis_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tab",
+            "required": true,
+            "schema": {
+              "enum": [
+                "cmi",
+                "finance",
+                "brand_category"
+              ],
+              "title": "Tab",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+            "in": "query",
+            "name": "mock_scenario",
+            "required": false,
+            "schema": {
+              "default": "normal",
+              "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+              "enum": [
+                "normal",
+                "empty",
+                "error"
+              ],
+              "title": "Mock Scenario",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+            "in": "cookie",
+            "name": "fnos_mock_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+              "title": "Fnos Mock Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpiTabResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "KPI cards for one Dashboard tab",
+        "tags": [
+          "dashboard (mock data, development only)"
+        ]
+      }
+    },
+    "/api/v1/dashboard/recent-reports": {
+      "get": {
+        "operationId": "read_recent_reports_api_v1_dashboard_recent_reports_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+            "in": "query",
+            "name": "mock_scenario",
+            "required": false,
+            "schema": {
+              "default": "normal",
+              "description": "Development aid: \"empty\" returns no records, \"error\" returns 503 mock_failure. Defaults to normal data.",
+              "enum": [
+                "normal",
+                "empty",
+                "error"
+              ],
+              "title": "Mock Scenario",
+              "type": "string"
+            }
+          },
+          {
+            "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+            "in": "cookie",
+            "name": "fnos_mock_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+              "title": "Fnos Mock Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecentReportsResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Most recently updated reports",
+        "tags": [
+          "dashboard (mock data, development only)"
+        ]
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "operationId": "read_health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Read Health",
+        "tags": [
+          "health"
+        ]
+      }
+    },
+    "/api/v1/session": {
+      "delete": {
+        "operationId": "delete_session_api_v1_session_delete",
+        "parameters": [
+          {
+            "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+            "in": "cookie",
+            "name": "fnos_mock_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+              "title": "Fnos Mock Session"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Sign out (safe to repeat)",
+        "tags": [
+          "session (mock, development only)"
+        ]
+      },
+      "get": {
+        "operationId": "read_session_api_v1_session_get",
+        "parameters": [
+          {
+            "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+            "in": "cookie",
+            "name": "fnos_mock_session",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "HttpOnly session cookie set by POST /api/v1/session; sent by the browser.",
+              "title": "Fnos Mock Session"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Current mock session",
+        "tags": [
+          "session (mock, development only)"
+        ]
+      },
+      "post": {
+        "operationId": "create_session_api_v1_session_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MockSignInRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionResponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Default Response"
+          }
+        },
+        "summary": "Mock sign-in: start a development session for any well-formed email",
+        "tags": [
+          "session (mock, development only)"
+        ]
+      }
+    }
+  }
+}

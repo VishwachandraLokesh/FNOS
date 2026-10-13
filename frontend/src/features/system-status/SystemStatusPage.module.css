@@ -1,0 +1,47 @@
+.page {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+}
+
+.heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.lead {
+  color: var(--color-text-muted);
+}
+
+.card {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.cardHeading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.errorBlock {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+.muted {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.ok {
+  color: var(--color-success);
+}
+
+.error {
+  color: var(--color-danger);
+}

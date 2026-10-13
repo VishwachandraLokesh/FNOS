@@ -1,0 +1,45 @@
+/* Design tokens. White surfaces, black as the primary colour. Final Figma designs are pending. */
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #fafafa;
+  --color-border: #e5e5e5;
+  /* Form control borders need at least 3:1 contrast against white (WCAG 1.4.11). */
+  --color-border-control: #8a8a8a;
+  --color-text: #0a0a0a;
+  --color-text-muted: #525252;
+  --color-primary: #000000;
+  --color-primary-hover: #262626;
+  --color-on-primary: #ffffff;
+  --color-danger: #b42318;
+  --color-danger-surface: #fef3f2;
+  --color-success: #067647;
+  --color-focus-ring: #000000;
+  --color-disabled-surface: #f5f5f5;
+
+  --font-family-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --font-size-display: 2.5rem;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-body: 1.5;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 4%), 0 8px 24px rgb(0 0 0 / 6%);
+  --control-height: 3rem;
+  --content-max-width: 1440px;
+}

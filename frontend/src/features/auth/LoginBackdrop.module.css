@@ -1,0 +1,98 @@
+/*
+ * Positions come from the Login mockup (assets/ui-mockups/login.svg, 1366×768), expressed as
+ * percentages of the page so the layout scales. Rotations pivot on the top-left corner, as in
+ * the mockup.
+ */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.backdrop > * {
+  position: absolute;
+  display: block;
+  transform-origin: top left;
+}
+
+.waves {
+  right: 0;
+  bottom: 0;
+  width: min(445px, 60vw);
+  height: auto;
+}
+
+.avocado {
+  top: 22.14%;
+  left: 20.28%;
+  width: 54px;
+  transform: rotate(-30deg);
+}
+
+.watermelon {
+  top: 41.54%;
+  left: 87.33%;
+  width: 69px;
+  transform: rotate(15deg);
+}
+
+.lemon {
+  top: 93.48%;
+  left: 85.5%;
+  width: 34px;
+  transform: rotate(-45deg);
+}
+
+.tomato {
+  top: 88.28%;
+  left: 48.9%;
+  width: 29px;
+}
+
+.dotMint {
+  width: 24px;
+  height: 24px;
+  top: 11.3%;
+  left: 73.4%;
+  fill: rgb(188 235 198 / 70%);
+}
+
+.dotFaint {
+  width: 24px;
+  height: 24px;
+  top: 52.6%;
+  left: 10.3%;
+  fill: rgb(6 137 35 / 20%);
+}
+
+.dotGreen {
+  width: 24px;
+  height: 24px;
+  top: 85.2%;
+  left: 5.2%;
+  fill: rgb(6 137 35 / 70%);
+}
+
+.triangle {
+  top: 82.8%;
+  left: 92.75%;
+  width: 41px;
+  height: 35px;
+  fill: rgb(245 172 98 / 50%);
+}
+
+.halfCircle {
+  top: 29.4%;
+  left: 4.6%;
+  width: 29px;
+  height: 29px;
+  fill: rgb(76 76 206 / 80%);
+}
+
+/* On narrow screens the card fills the width; keep only decoration that cannot cover it. */
+@media (width < 64rem) {
+  .backdrop > :not(.waves, .dotGreen, .triangle) {
+    display: none;
+  }
+}

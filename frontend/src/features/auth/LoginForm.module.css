@@ -1,0 +1,46 @@
+.form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.heading {
+  margin-bottom: var(--space-1);
+  color: var(--login-heading, inherit);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Read-only row showing how sign-in happens (the mockup's "MARS-Federated-SSO-Active" slot). */
+.method {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3.5rem;
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--login-outline, var(--color-border));
+  border-radius: 8px;
+  background: var(--color-bg);
+  box-shadow: 0 4px 4px rgb(0 0 0 / 2%);
+  color: var(--login-text, inherit);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Matches the method row above it; states (hover, focus, invalid) still come from TextField. */
+.email input {
+  min-height: 3.5rem;
+  padding-inline: var(--space-6);
+  border-radius: 8px;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 2%);
+}
+
+.mockTag {
+  margin-left: auto;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-text);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
